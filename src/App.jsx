@@ -35,27 +35,31 @@ function App() {
 
   return (
     <div className="w-full overflow-hidden">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      
       <Suspense fallback={<LoadingSpinner />}>
         <Header/>
       </Suspense>
       
-      <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse"></div>}>
-        <About/>
-      </Suspense>
+      <main role="main" id="main-content">
+        <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse loading-skeleton" aria-label="Loading about section"></div>}>
+          <About/>
+        </Suspense>
+        
+        <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse loading-skeleton" aria-label="Loading projects section"></div>}>
+          <Project/>
+        </Suspense>
+        
+        <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse loading-skeleton" aria-label="Loading testimonials section"></div>}>
+          <Testimonials/>
+        </Suspense>
+        
+        <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse loading-skeleton" aria-label="Loading contact section"></div>}>
+          <Contactus/>
+        </Suspense>
+      </main>
       
-      <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse"></div>}>
-        <Project/>
-      </Suspense>
-      
-      <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse"></div>}>
-        <Testimonials/>
-      </Suspense>
-      
-      <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse"></div>}>
-        <Contactus/>
-      </Suspense>
-      
-      <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse"></div>}>
+      <Suspense fallback={<div className="h-96 bg-gray-100 animate-pulse loading-skeleton" aria-label="Loading footer"></div>}>
         <Footer/>
       </Suspense>
       
@@ -70,6 +74,8 @@ function App() {
         draggable
         pauseOnHover
         toastClassName="text-sm"
+        role="alert"
+        aria-live="polite"
       />
     </div>
   )

@@ -177,9 +177,20 @@ const Header = () => {
           ref={buttonsRef}
           className="space-x-6 mt-16 gsap-element"
         >
-            <a className="inline-block border border-white px-8 py-3 rounded hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 hover:shadow-lg" href="#Projects">Project</a>
-            <a className="inline-block bg-blue-500 px-8 py-3 rounded hover:bg-blue-600 transition-all duration-300 transform hover:scale-105 hover:shadow-lg" 
-            href="#Contact">Contact Us</a>
+            <a 
+              className="inline-block border-2 border-white px-8 py-3 rounded hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black" 
+              href="#Projects"
+              aria-label="View our projects portfolio"
+            >
+              Project
+            </a>
+            <a 
+              className="inline-block bg-blue-600 text-white px-8 py-3 rounded hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-black" 
+              href="#Contact"
+              aria-label="Contact us for real estate services"
+            >
+              Contact Us
+            </a>
         </div>
        </div>
     </div>

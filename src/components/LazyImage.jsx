@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 const LazyImage = ({ src, alt, className, placeholder, ...props }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isInView, setIsInView] = useState(false)
+  const [hasError, setHasError] = useState(false)
   const imgRef = useRef(null)
 
   useEffect(() => {
@@ -27,28 +28,46 @@ const LazyImage = ({ src, alt, className, placeholder, ...props }) => {
     setIsLoaded(true)
   }
 
+  const handleError = () => {
+    setHasError(true)
+    setIsLoaded(true)
+  }
+
+  // Ensure alt text is always provided
+  const altText = alt || 'Image'
+
   return (
     <div ref={imgRef} className={`relative ${className}`} {...props}>
       {/* Placeholder */}
       {!isLoaded && (
-        <div className={`absolute inset-0 bg-gray-200 animate-pulse ${className}`}>
-          {placeholder && (
-            <div className="flex items-center justify-center h-full text-gray-400">
+        <div className={`absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center ${className}`}>
+          {placeholder ? (
+            <span className="text-gray-400 text-sm" aria-label="Loading image">
               {placeholder}
-            </div>
+            </span>
+          ) : (
+            <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin" aria-label="Loading"></div>
           )}
         </div>
       )}
       
+      {/* Error state */}
+      {hasError && (
+        <div className={`flex items-center justify-center bg-gray-100 text-gray-500 ${className}`}>
+          <span className="text-sm">Image unavailable</span>
+        </div>
+      )}
+      
       {/* Actual Image */}
-      {isInView && (
+      {isInView && !hasError && (
         <img
           src={src}
-          alt={alt}
+          alt={altText}
           className={`transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           } ${className}`}
           onLoad={handleLoad}
+          onError={handleError}
           loading="lazy"
           decoding="async"
         />

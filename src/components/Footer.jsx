@@ -86,47 +86,57 @@ const Footer = () => {
     >
       <div className='container mx-auto flex flex-col md:flex-row justify-between items-start'>
         <div className='w-full md:w-1/3 mb-8 md:mb-0'>
-          <img src={assets.logo} alt="Logo" className='mb-4 w-40' />
+          <img src={assets.logo} alt="Adusity - Premium Real Estate Portfolio Logo" className='mb-4 w-40' />
           <p className='text-gray-400 leading-relaxed'>
             Building exceptional digital experiences with cutting-edge technology and innovative design solutions.
           </p>
         </div>
 
         <div className='w-full md:w-1/3 mb-8 md:mb-0'>
-          <h3 className='text-white text-lg font-semibold mb-4'>Quick Links</h3>
-          <ul className='text-gray-400 space-y-2'>
-            <li><a href="#Header" className='hover:text-white transition-colors'>Home</a></li>
-            <li><a href="#About" className='hover:text-white transition-colors'>About</a></li>
-            <li><a href="#Projects" className='hover:text-white transition-colors'>Projects</a></li>
-            <li><a href="#Testimonials" className='hover:text-white transition-colors'>Testimonials</a></li>
-            <li><a href="#Contact" className='hover:text-white transition-colors'>Contact</a></li>
-          </ul>
+          <h2 className='text-white text-lg font-semibold mb-4'>Quick Links</h2>
+          <nav aria-label="Footer navigation">
+            <ul className='text-gray-400 space-y-2'>
+              <li><a href="#Header" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>Home</a></li>
+              <li><a href="#About" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>About</a></li>
+              <li><a href="#Projects" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>Projects</a></li>
+              <li><a href="#Testimonials" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>Testimonials</a></li>
+              <li><a href="#Contact" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>Contact</a></li>
+            </ul>
+          </nav>
         </div>
 
         <div className='w-full md:w-1/3'>
-          <h3 className='text-white text-lg font-semibold mb-4'>Newsletter</h3>
+          <h2 className='text-white text-lg font-semibold mb-4'>Newsletter</h2>
           <p className='text-gray-400 mb-4'>Subscribe to get updates on our latest projects</p>
-          <form onSubmit={handleSubscribe} className='flex'>
+          <form onSubmit={handleSubscribe} className='flex' role="form" aria-label="Newsletter subscription">
+            <label htmlFor="newsletter-email" className="sr-only">Email address for newsletter</label>
             <input 
+              id="newsletter-email"
               type="email" 
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={isSubmitting}
-              className='flex-1 px-4 py-2 rounded-l-md border border-white outline-none'
+              className='flex-1 px-4 py-2 rounded-l-md border border-white outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+              aria-describedby="newsletter-description"
+              required
             />
             <button 
               type="submit"
               disabled={isSubmitting}
-              className={`px-4 py-2 rounded-r-md transition-colors ${
+              className={`px-4 py-2 rounded-r-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900 ${
                 isSubmitting 
                   ? 'bg-gray-400 text-gray-200 cursor-not-allowed' 
                   : 'bg-blue-600 text-white hover:bg-blue-700'
               }`}
+              aria-label={isSubmitting ? 'Subscribing to newsletter...' : 'Subscribe to newsletter'}
             >
               {isSubmitting ? 'Subscribing...' : 'Subscribe'}
             </button>
           </form>
+          <p id="newsletter-description" className="sr-only">
+            Subscribe to receive updates about our latest real estate projects and services.
+          </p>
         </div>
       </div>
 

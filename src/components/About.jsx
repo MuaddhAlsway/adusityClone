@@ -93,22 +93,23 @@ const About = () => {
   }, [])
 
   return (
-    <div 
+    <section 
       ref={aboutRef}
       className="flex flex-col items-center justify-center container 
       p-14
       mx-auto md:px-20 lg:px-32 w-full overflow-hidden" 
       id="About"
+      aria-labelledby="about-heading"
     >
-        <div ref={titleRef}>
-          <h1 className="text-2xl sm:text-4xl font-bold mb-2">About <span className="underline underline-offset-4 decoration-1 font-light">Our Brand</span></h1>
+        <header ref={titleRef}>
+          <h1 id="about-heading" className="text-2xl sm:text-4xl font-bold mb-2">About <span className="underline underline-offset-4 decoration-1 font-light">Our Brand</span></h1>
           <p className="text-gray-500 max-w-80 text-center mb-8">Passionate About Properties, Dedicated to Your Vision</p>
-        </div>
+        </header>
     <div className="flex flex-col md:flex-row items-center md:items-start md:gap-20">
       <LazyImage 
         ref={imageRef}
         src={assets.brand_img} 
-        alt="Brand" 
+        alt="Adusity brand showcase - modern real estate development and architectural excellence" 
         className='w-full sm:w-1/2 max-w-lg'
         placeholder="Loading brand image..."
       />
@@ -116,21 +117,23 @@ const About = () => {
         <div 
           ref={statsRef}
           className='grid grid-cols-2 gap-6 md:gap-10 w-full 2xl:pr-28'
+          role="region"
+          aria-label="Company statistics"
         >
           <div>
-            <p className='text-4xl font-medium text-gray-800'>10+</p>
+            <p className='text-4xl font-medium text-gray-800' aria-label="10 plus years of excellence">10+</p>
             <p>Years of Excellence</p>
           </div>
           <div>
-            <p className='text-4xl font-medium text-gray-800'>12+</p>
+            <p className='text-4xl font-medium text-gray-800' aria-label="12 plus projects completed">12+</p>
             <p>Projects Completed</p>
           </div>
           <div>
-            <p className='text-4xl font-medium text-gray-800'>20+</p>
+            <p className='text-4xl font-medium text-gray-800' aria-label="20 plus million square feet delivered">20+</p>
             <p>Mn. Sq. Ft. Delivered</p>
           </div>
           <div>
-            <p className='text-4xl font-medium text-gray-800'>25+</p>
+            <p className='text-4xl font-medium text-gray-800' aria-label="25 plus ongoing projects">25+</p>
             <p>Ongoing Projects</p>
           </div>
         </div>
@@ -138,11 +141,16 @@ const About = () => {
           <p className='my-10 max-w-lg'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
-          <button className='bg-blue-600 text-white px-8 py-2 rounded hover:bg-blue-700 transition-all duration-300 transform hover:scale-105'>Learn more</button>
+          <button 
+            className='bg-blue-600 text-white px-8 py-2 rounded hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+            aria-label="Learn more about Adusity services"
+          >
+            Learn more
+          </button>
         </div>
       </div>
     </div>
-    </div>
+    </section>
 
   )
 }
