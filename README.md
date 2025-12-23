@@ -2,7 +2,9 @@
 
 A modern, responsive real estate portfolio website built with React, Vite, Tailwind CSS, and GSAP animations.
 
-## Features
+![Website Preview](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=vercel)
+
+## 🌟 Features
 
 - 🏠 Modern real estate portfolio design
 - 📱 Fully responsive layout
@@ -12,7 +14,19 @@ A modern, responsive real estate portfolio website built with React, Vite, Tailw
 - 🎨 Beautiful UI with Tailwind CSS
 - 🚀 Fast performance with Vite
 
-## Technologies Used
+## 🛠️ Technologies Used
+
+<div align="center">
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+
+</div>
 
 - **React 19** - Frontend framework
 - **Vite** - Build tool and dev server
@@ -21,7 +35,7 @@ A modern, responsive real estate portfolio website built with React, Vite, Tailw
 - **React Toastify** - Toast notifications
 - **Web3Forms** - Form handling service
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -31,8 +45,8 @@ A modern, responsive real estate portfolio website built with React, Vite, Tailw
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME.git
-cd YOUR_REPOSITORY_NAME
+git clone https://github.com/MuaddhAlsway/adusityClone.git
+cd adusityClone
 ```
 
 2. Install dependencies:
@@ -47,23 +61,9 @@ npm run dev
 
 4. Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
-## Deployment to GitHub Pages
+## 📦 Deployment to GitHub Pages
 
-### Step 1: Update Configuration
-
-1. **Update package.json homepage URL:**
-   Replace `YOUR_GITHUB_USERNAME` and `YOUR_REPOSITORY_NAME` in package.json:
-   ```json
-   "homepage": "https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY_NAME"
-   ```
-
-2. **Update vite.config.js base path:**
-   Replace `YOUR_REPOSITORY_NAME` in vite.config.js:
-   ```javascript
-   base: '/YOUR_REPOSITORY_NAME/'
-   ```
-
-### Step 2: Deploy
+### Step 1: Deploy
 
 1. **Build and deploy:**
    ```bash
@@ -78,16 +78,16 @@ npm run dev
    - Click Save
 
 3. **Access your live site:**
-   Your site will be available at: `https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY_NAME`
+   Your site will be available at: `https://MuaddhAlsway.github.io/adusityClone`
 
-### Step 3: Update for Future Deployments
+### Step 2: Update for Future Deployments
 
 For future updates, simply run:
 ```bash
 npm run deploy
 ```
 
-## Available Scripts
+## 📜 Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
@@ -95,7 +95,7 @@ npm run deploy
 - `npm run deploy` - Deploy to GitHub Pages
 - `npm run lint` - Run ESLint
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 src/
@@ -113,7 +113,7 @@ src/
 └── index.css          # Global styles
 ```
 
-## Contact Form Setup
+## 📧 Contact Form Setup
 
 The contact form uses Web3Forms for handling submissions. To set up:
 
@@ -122,7 +122,19 @@ The contact form uses Web3Forms for handling submissions. To set up:
 3. Get your access key
 4. The access key is already configured in the project
 
-## Contributing
+## 🎨 Animation Features
+
+- **Scroll-triggered animations** using GSAP ScrollTrigger
+- **Smooth entrance effects** for all sections
+- **Interactive hover states** on buttons and cards
+- **Parallax scrolling** on hero section
+- **Staggered animations** for multiple elements
+
+## 🌐 Live Demo
+
+Visit the live website: [https://MuaddhAlsway.github.io/adusityClone](https://MuaddhAlsway.github.io/adusityClone)
+
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -130,10 +142,19 @@ The contact form uses Web3Forms for handling submissions. To set up:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License.
 
+## 👨‍💻 Author
+
+**Muaddh Alsway**
+- GitHub: [@MuaddhAlsway](https://github.com/MuaddhAlsway)
+
 ---
 
-**Note:** Remember to replace `YOUR_GITHUB_USERNAME` and `YOUR_REPOSITORY_NAME` with your actual GitHub username and repository name before deploying.
+<div align="center">
+
+**⭐ Star this repository if you found it helpful!**
+
+</div>

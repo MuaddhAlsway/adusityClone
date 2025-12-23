@@ -12,29 +12,31 @@ const Footer = () => {
   const footerRef = useRef(null)
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const footerSections = footerRef.current.children[0].children
-      
-      gsap.fromTo(footerSections,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse"
+    if (footerRef.current) {
+      const ctx = gsap.context(() => {
+        const footerSections = footerRef.current.children[0].children
+        
+        gsap.fromTo(footerSections,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.2,
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play none none reverse"
+            }
           }
-        }
-      )
+        )
 
-    }, footerRef)
+      }, footerRef)
 
-    return () => ctx.revert()
+      return () => ctx.revert()
+    }
   }, [])
 
   const handleSubscribe = async (e) => {

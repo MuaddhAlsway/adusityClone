@@ -4,3 +4,9 @@
 * {
     font-family: 'Outfit', sans-serif;
 }
+
+/* Ensure elements are visible by default in case GSAP doesn't load */
+.gsap-element {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
