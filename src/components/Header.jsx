@@ -35,19 +35,21 @@ const Header = () => {
         })
 
         // Add dark overlay animation
-        gsap.set(overlayRef.current, {
-          opacity: 0.7
-        })
+        if (overlayRef.current) {
+          gsap.set(overlayRef.current, {
+            opacity: 0.7
+          })
 
-        // Animate overlay fade in
-        tl.to(overlayRef.current, {
-          opacity: 0.4,
-          duration: 1,
-          ease: "power2.out"
-        })
+          // Animate overlay fade in
+          tl.to(overlayRef.current, {
+            opacity: 0.4,
+            duration: 1,
+            ease: "power2.out"
+          })
+        }
 
         // Animate title with more dramatic effect
-        .to(titleRef.current, {
+        tl.to(titleRef.current, {
           opacity: 1,
           y: 0,
           scale: 1,
@@ -66,53 +68,59 @@ const Header = () => {
         }, "-=1")
 
         // Animate buttons with stagger and bounce
-        .to(buttonsRef.current.children, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: "back.out(1.7)",
-          stagger: 0.2
-        }, "-=0.5")
+        if (buttonsRef.current && buttonsRef.current.children) {
+          tl.to(buttonsRef.current.children, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            stagger: 0.2
+          }, "-=0.5")
+        }
 
         // Add floating animation to container
-        gsap.to(containerRef.current, {
-          y: -20,
-          duration: 3,
-          ease: "power2.inOut",
-          yoyo: true,
-          repeat: -1
-        })
-
-        // Enhanced parallax effect on scroll
-        if (headerRef.current) {
-          gsap.to(headerRef.current, {
-            yPercent: -30,
-            ease: "none",
-            scrollTrigger: {
-              trigger: headerRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: 1
-            }
-          })
-
-          // Fade out content on scroll
+        if (containerRef.current) {
           gsap.to(containerRef.current, {
-            opacity: 0,
-            y: -100,
-            ease: "none",
-            scrollTrigger: {
-              trigger: headerRef.current,
-              start: "top top",
-              end: "50% top",
-              scrub: 1
-            }
+            y: -20,
+            duration: 3,
+            ease: "power2.inOut",
+            yoyo: true,
+            repeat: -1
           })
+
+          // Enhanced parallax effect on scroll
+          if (headerRef.current) {
+            gsap.to(headerRef.current, {
+              yPercent: -30,
+              ease: "none",
+              scrollTrigger: {
+                trigger: headerRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1
+              }
+            })
+
+            // Fade out content on scroll
+            gsap.to(containerRef.current, {
+              opacity: 0,
+              y: -100,
+              ease: "none",
+              scrollTrigger: {
+                trigger: headerRef.current,
+                start: "top top",
+                end: "50% top",
+                scrub: 1
+              }
+            })
+          }
         }
 
         // Add mouse move parallax effect (throttled for performance)
         const handleMouseMove = throttle((e) => {
+          if (!containerRef.current) return
+          
           const { clientX, clientY } = e
           const { innerWidth, innerHeight } = window
           
@@ -132,6 +140,13 @@ const Header = () => {
         // Cleanup mouse event
         return () => {
           window.removeEventListener('mousemove', handleMouseMove)
+          ScrollTrigger.getAll().forEach(trigger => {
+            try {
+              trigger.kill()
+            } catch (e) {
+              console.warn('Error killing trigger:', e)
+            }
+          })
         }
 
       } catch (error) {
@@ -145,7 +160,11 @@ const Header = () => {
     // Cleanup function
     return () => {
       clearTimeout(timeout)
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      try {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      } catch (e) {
+        console.warn('Error cleaning up triggers:', e)
+      }
     }
   }, [])
 

@@ -16,7 +16,7 @@ const Footer = () => {
       try {
         const ctx = gsap.context(() => {
           const mainContainer = footerRef.current.querySelector('.footer-main-container')
-          if (mainContainer) {
+          if (mainContainer && mainContainer.children && mainContainer.children.length > 0) {
             const footerSections = mainContainer.children
             
             gsap.fromTo(footerSections,
@@ -38,7 +38,13 @@ const Footer = () => {
           }
         }, footerRef)
 
-        return () => ctx.revert()
+        return () => {
+          try {
+            ctx.revert()
+          } catch (e) {
+            console.warn('Error reverting Footer GSAP context:', e)
+          }
+        }
       } catch (error) {
         console.warn('Footer animation error:', error)
       }

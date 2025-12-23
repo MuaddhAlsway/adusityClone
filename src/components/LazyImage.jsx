@@ -5,7 +5,18 @@ const LazyImage = forwardRef(({ src, alt, className, placeholder, width = 800, h
   const [isInView, setIsInView] = useState(false)
   const [hasError, setHasError] = useState(false)
   const imgRef = useRef(null)
-  const containerRef = ref || useRef(null)
+  const containerRef = useRef(null)
+
+  // Use the provided ref if available, otherwise use containerRef
+  useEffect(() => {
+    if (ref) {
+      if (typeof ref === 'function') {
+        ref(containerRef.current)
+      } else {
+        ref.current = containerRef.current
+      }
+    }
+  }, [ref])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -48,7 +59,7 @@ const LazyImage = forwardRef(({ src, alt, className, placeholder, width = 800, h
     >
       {/* Placeholder */}
       {!isLoaded && (
-        <div className={`absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center ${className}`}>
+        <div className={`absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center`}>
           {placeholder ? (
             <span className="text-gray-400 text-sm" aria-label="Loading image">
               {placeholder}
@@ -61,7 +72,7 @@ const LazyImage = forwardRef(({ src, alt, className, placeholder, width = 800, h
       
       {/* Error state */}
       {hasError && (
-        <div className={`flex items-center justify-center bg-gray-100 text-gray-500 ${className}`}>
+        <div className={`flex items-center justify-center bg-gray-100 text-gray-500 w-full h-full`}>
           <span className="text-sm">Image unavailable</span>
         </div>
       )}
@@ -76,7 +87,7 @@ const LazyImage = forwardRef(({ src, alt, className, placeholder, width = 800, h
           height={height}
           className={`transition-opacity duration-300 w-full h-auto ${
             isLoaded ? 'opacity-100' : 'opacity-0'
-          } ${className}`}
+          }`}
           onLoad={handleLoad}
           onError={handleError}
           loading="lazy"

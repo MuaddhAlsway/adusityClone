@@ -18,44 +18,58 @@ const Contactus = () => {
 
   useEffect(() => {
     if (titleRef.current && formRef.current) {
-      const ctx = gsap.context(() => {
-        // Title animation
-        gsap.fromTo(titleRef.current, 
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: titleRef.current,
-              start: "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse"
-            }
+      try {
+        const ctx = gsap.context(() => {
+          // Title animation
+          if (titleRef.current) {
+            gsap.fromTo(titleRef.current, 
+              { opacity: 0, y: 50 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: titleRef.current,
+                  start: "top 80%",
+                  end: "bottom 20%",
+                  toggleActions: "play none none reverse"
+                }
+              }
+            )
           }
-        )
 
-        // Form animation
-        gsap.fromTo(formRef.current,
-          { opacity: 0, y: 100 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: formRef.current,
-              start: "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse"
-            }
+          // Form animation
+          if (formRef.current) {
+            gsap.fromTo(formRef.current,
+              { opacity: 0, y: 100 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: formRef.current,
+                  start: "top 80%",
+                  end: "bottom 20%",
+                  toggleActions: "play none none reverse"
+                }
+              }
+            )
           }
-        )
 
-      }, contactRef)
+        }, contactRef)
 
-      return () => ctx.revert()
+        return () => {
+          try {
+            ctx.revert()
+          } catch (e) {
+            console.warn('Error reverting Contact GSAP context:', e)
+          }
+        }
+      } catch (error) {
+        console.warn('GSAP animation error in Contact:', error)
+      }
     }
   }, [])
 

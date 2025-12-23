@@ -63,47 +63,63 @@ const Project = () => {
     }, [])
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Title animation
-            gsap.fromTo(titleRef.current,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: titleRef.current,
-                        start: "top 80%",
-                        end: "bottom 20%",
-                        toggleActions: "play none none reverse"
+        try {
+            const ctx = gsap.context(() => {
+                // Title animation
+                if (titleRef.current) {
+                    gsap.fromTo(titleRef.current,
+                        { opacity: 0, y: 50 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: titleRef.current,
+                                start: "top 80%",
+                                end: "bottom 20%",
+                                toggleActions: "play none none reverse"
+                            }
+                        }
+                    )
+                }
+
+                // Cards animation
+                if (cardsRef.current && cardsRef.current.children[0]) {
+                    const cards = cardsRef.current.children[0].children
+                    if (cards && cards.length > 0) {
+                        gsap.fromTo(cards,
+                            { opacity: 0, y: 100, scale: 0.8 },
+                            {
+                                opacity: 1,
+                                y: 0,
+                                scale: 1,
+                                duration: 0.8,
+                                ease: "back.out(1.7)",
+                                stagger: 0.2,
+                                scrollTrigger: {
+                                    trigger: cardsRef.current,
+                                    start: "top 80%",
+                                    end: "bottom 20%",
+                                    toggleActions: "play none none reverse"
+                                }
+                            }
+                        )
                     }
                 }
-            )
 
-            // Cards animation
-            const cards = cardsRef.current.children[0].children
-            gsap.fromTo(cards,
-                { opacity: 0, y: 100, scale: 0.8 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    duration: 0.8,
-                    ease: "back.out(1.7)",
-                    stagger: 0.2,
-                    scrollTrigger: {
-                        trigger: cardsRef.current,
-                        start: "top 80%",
-                        end: "bottom 20%",
-                        toggleActions: "play none none reverse"
-                    }
+            }, projectRef)
+
+            return () => {
+                try {
+                    ctx.revert()
+                } catch (e) {
+                    console.warn('Error reverting Project GSAP context:', e)
                 }
-            )
-
-        }, projectRef)
-
-        return () => ctx.revert()
+            }
+        } catch (error) {
+            console.warn('GSAP animation error in Project:', error)
+        }
     }, [])
 
     const nextProject = () => {
