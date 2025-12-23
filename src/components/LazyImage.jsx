@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 
-const LazyImage = ({ src, alt, className, placeholder, ...props }) => {
+const LazyImage = ({ src, alt, className, placeholder, width = 800, height = 600, ...props }) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isInView, setIsInView] = useState(false)
   const [hasError, setHasError] = useState(false)
@@ -37,7 +37,14 @@ const LazyImage = ({ src, alt, className, placeholder, ...props }) => {
   const altText = alt || 'Image'
 
   return (
-    <div ref={imgRef} className={`relative ${className}`} {...props}>
+    <div 
+      ref={imgRef} 
+      className={`relative ${className}`}
+      style={{
+        aspectRatio: `${width}/${height}`
+      }}
+      {...props}
+    >
       {/* Placeholder */}
       {!isLoaded && (
         <div className={`absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center ${className}`}>
@@ -63,7 +70,9 @@ const LazyImage = ({ src, alt, className, placeholder, ...props }) => {
         <img
           src={src}
           alt={altText}
-          className={`transition-opacity duration-300 ${
+          width={width}
+          height={height}
+          className={`transition-opacity duration-300 w-full h-auto ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           } ${className}`}
           onLoad={handleLoad}

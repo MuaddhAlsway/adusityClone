@@ -21,6 +21,8 @@ const ProjectCard = memo(({ project, index, cardsToShow }) => {
           alt={project.title} 
           className="w-full h-auto mb-14 rounded-lg transition-transform duration-500 group-hover:scale-110"
           placeholder="Loading..."
+          width={800}
+          height={600}
         />
       </div>
       <div className="absolute left-3 right-3 bottom-5 flex justify-center">

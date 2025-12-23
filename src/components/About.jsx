@@ -112,6 +112,8 @@ const About = () => {
         alt="Adusity brand showcase - modern real estate development and architectural excellence" 
         className='w-full sm:w-1/2 max-w-lg'
         placeholder="Loading brand image..."
+        width={1200}
+        height={800}
       />
       <div className='flex flex-col items-center md:items-start mt-10 text-gray-600'>
         <div 

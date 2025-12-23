@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
 
@@ -6,21 +6,29 @@
     font-family: 'Outfit', sans-serif;
 }
 
-/* Ensure elements are visible by default in case GSAP doesn't load */
+/* Critical rendering path optimizations */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure elements are visible by default */
 .gsap-element {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
 
-/* Performance optimizations */
+/* Image optimizations */
 img {
     content-visibility: auto;
-    contain-intrinsic-size: 300px 200px;
-}
-
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
+    contain-intrinsic-size: auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Screen reader only content */
@@ -36,7 +44,7 @@ html {
     border: 0;
 }
 
-/* Skip to main content link */
+/* Skip link */
 .skip-link {
     position: absolute;
     top: -40px;
@@ -53,7 +61,7 @@ html {
     top: 6px;
 }
 
-/* Reduce motion for users who prefer it */
+/* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -65,7 +73,7 @@ html {
     }
 }
 
-/* High contrast mode support */
+/* High contrast mode */
 @media (prefers-contrast: high) {
     .text-gray-500 {
         color: #000 !important;
@@ -74,93 +82,27 @@ html {
     .text-gray-400 {
         color: #333 !important;
     }
-    
-    .bg-blue-500,
-    .bg-blue-600 {
-        background-color: #0000ff !important;
-    }
-    
-    .border-white {
-        border-color: #000 !important;
-    }
 }
 
-/* Critical CSS for above-the-fold content */
-.hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Optimize animations */
-.animate-spin {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Enhanced focus states for accessibility */
+/* Focus states */
 :focus-visible {
     outline: 2px solid #3b82f6;
     outline-offset: 2px;
 }
 
-/* Ensure sufficient color contrast */
-.text-blue-500 {
-    color: #1d4ed8; /* Darker blue for better contrast */
+/* Loading animation */
+.animate-spin {
+    animation: spin 1s linear infinite;
 }
 
-.bg-blue-500 {
-    background-color: #1d4ed8; /* Darker blue for better contrast */
-}
-
-.bg-blue-600 {
-    background-color: #1e40af; /* Even darker for buttons */
-}
-
-/* Loading states */
-.loading-skeleton {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-}
-
-@keyframes loading {
-    0% {
-        background-position: 200% 0;
-    }
-    100% {
-        background-position: -200% 0;
-    }
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* Print styles */
 @media print {
     .no-print {
         display: none !important;
-    }
-    
-    * {
-        background: transparent !important;
-        color: black !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
-    
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
-    
-    a[href]:after {
-        content: " (" attr(href) ")";
     }
 }
