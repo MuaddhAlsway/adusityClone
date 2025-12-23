@@ -33,6 +33,9 @@ export const assets = {
     project_img_6,
     left_arrow,
     right_arrow,
+    profile_img_1,
+    profile_img_2,
+    profile_img_3,
 }
 
 export const projectsData = [

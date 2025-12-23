@@ -13,29 +13,35 @@ const Footer = () => {
 
   useEffect(() => {
     if (footerRef.current) {
-      const ctx = gsap.context(() => {
-        const footerSections = footerRef.current.children[0].children
-        
-        gsap.fromTo(footerSections,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out",
-            stagger: 0.2,
-            scrollTrigger: {
-              trigger: footerRef.current,
-              start: "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse"
-            }
+      try {
+        const ctx = gsap.context(() => {
+          const mainContainer = footerRef.current.querySelector('.footer-main-container')
+          if (mainContainer) {
+            const footerSections = mainContainer.children
+            
+            gsap.fromTo(footerSections,
+              { opacity: 0, y: 50 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                stagger: 0.2,
+                scrollTrigger: {
+                  trigger: footerRef.current,
+                  start: "top 80%",
+                  end: "bottom 20%",
+                  toggleActions: "play none none reverse"
+                }
+              }
+            )
           }
-        )
+        }, footerRef)
 
-      }, footerRef)
-
-      return () => ctx.revert()
+        return () => ctx.revert()
+      } catch (error) {
+        console.warn('Footer animation error:', error)
+      }
     }
   }, [])
 
@@ -84,8 +90,8 @@ const Footer = () => {
         className='pt-10 px-4 md:px-20 lg:px-32 bg-gray-900 w-full overflow-hidden' 
         id='Footer'
     >
-      <div className='container mx-auto flex flex-col md:flex-row justify-between items-start'>
-        <div className='w-full md:w-1/3 mb-8 md:mb-0'>
+      <div className='footer-main-container container mx-auto flex flex-col md:flex-row justify-between items-start gap-8'>
+        <div className='w-full md:w-1/3'>
           <img 
             src={assets.logo} 
             alt="Adusity - Premium Real Estate Portfolio Logo" 
@@ -100,15 +106,15 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className='w-full md:w-1/3 mb-8 md:mb-0'>
+        <div className='w-full md:w-1/3'>
           <h2 className='text-white text-lg font-semibold mb-4'>Quick Links</h2>
           <nav aria-label="Footer navigation">
             <ul className='text-gray-400 space-y-2'>
-              <li><a href="#Header" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>Home</a></li>
-              <li><a href="#About" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>About</a></li>
-              <li><a href="#Projects" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>Projects</a></li>
-              <li><a href="#Testimonials" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>Testimonials</a></li>
-              <li><a href="#Contact" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded'>Contact</a></li>
+              <li><a href="#Header" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1 inline-block'>Home</a></li>
+              <li><a href="#About" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1 inline-block'>About</a></li>
+              <li><a href="#Projects" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1 inline-block'>Projects</a></li>
+              <li><a href="#Testimonials" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1 inline-block'>Testimonials</a></li>
+              <li><a href="#Contact" className='hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1 inline-block'>Contact</a></li>
             </ul>
           </nav>
         </div>
@@ -116,7 +122,7 @@ const Footer = () => {
         <div className='w-full md:w-1/3'>
           <h2 className='text-white text-lg font-semibold mb-4'>Newsletter</h2>
           <p className='text-gray-400 mb-4'>Subscribe to get updates on our latest projects</p>
-          <form onSubmit={handleSubscribe} className='flex' role="form" aria-label="Newsletter subscription">
+          <form onSubmit={handleSubscribe} className='flex flex-col sm:flex-row gap-2' role="form" aria-label="Newsletter subscription">
             <label htmlFor="newsletter-email" className="sr-only">Email address for newsletter</label>
             <input 
               id="newsletter-email"
@@ -125,14 +131,14 @@ const Footer = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={isSubmitting}
-              className='flex-1 px-4 py-2 rounded-l-md border border-white outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+              className='flex-1 px-4 py-2 rounded-md border border-white bg-transparent text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all'
               aria-describedby="newsletter-description"
               required
             />
             <button 
               type="submit"
               disabled={isSubmitting}
-              className={`px-4 py-2 rounded-r-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900 ${
+              className={`px-6 py-2 rounded-md font-medium transition-all focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900 whitespace-nowrap ${
                 isSubmitting 
                   ? 'bg-gray-400 text-gray-200 cursor-not-allowed' 
                   : 'bg-blue-600 text-white hover:bg-blue-700'
@@ -149,14 +155,14 @@ const Footer = () => {
       </div>
 
       <div className='border-t border-gray-700 mt-10 pt-6 pb-6'>
-        <div className='container mx-auto flex flex-col md:flex-row justify-between items-center'>
-          <p className='text-gray-400 text-sm mb-4 md:mb-0'>
+        <div className='container mx-auto flex flex-col md:flex-row justify-between items-center gap-4'>
+          <p className='text-gray-400 text-sm'>
             © 2024 Your Company Name. All rights reserved.
           </p>
           <div className='flex space-x-6'>
-            <a href="#" className='text-gray-400 hover:text-white transition-colors text-sm'>Privacy Policy</a>
-            <a href="#" className='text-gray-400 hover:text-white transition-colors text-sm'>Terms of Service</a>
-            <a href="#" className='text-gray-400 hover:text-white transition-colors text-sm'>Cookie Policy</a>
+            <a href="#" className='text-gray-400 hover:text-white transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1'>Privacy Policy</a>
+            <a href="#" className='text-gray-400 hover:text-white transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1'>Terms of Service</a>
+            <a href="#" className='text-gray-400 hover:text-white transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded px-2 py-1'>Cookie Policy</a>
           </div>
         </div>
       </div>

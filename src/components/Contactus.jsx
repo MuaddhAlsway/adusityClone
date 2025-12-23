@@ -129,12 +129,12 @@ const Contactus = () => {
   return (
     <div 
         ref={contactRef}
-        className='text-center p-6 py-20 lg:px-32 w-full overflow-hidden' 
+        className='text-center p-6 py-20 px-4 md:px-20 lg:px-32 w-full overflow-hidden' 
         id='Contact'
     >
         <div ref={titleRef}>
             <h1 className='text-2xl sm:text-4xl font-bold mb-2 text-center'>
-                Contact <span className='underline underline-offset-4 decoration-1 under font-light'>With us</span>
+                Contact <span className='underline underline-offset-4 decoration-1 font-light'>With us</span>
             </h1>
             <p className='text-center text-gray-500 mb-12 max-w-80 mx-auto'>
                 Ready to make a move? Let's build Your Future Together
@@ -146,11 +146,11 @@ const Contactus = () => {
             onSubmit={handleSubmit} 
             className='max-w-2xl mx-auto text-gray-600 pt-8'
         >
-            <div className='flex flex-wrap'>
+            <div className='flex flex-wrap gap-4'>
                 <div className='w-full md:w-1/2 text-left'>
-                    Your Name
+                    <label className='block text-sm font-medium mb-2'>Your Name</label>
                     <input 
-                        className='w-full border border-gray-300 rounded py-3 px-4 mt-2 focus:border-blue-500 focus:outline-none transition-all duration-300' 
+                        className='w-full border border-gray-300 rounded py-3 px-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-300' 
                         required 
                         name='name' 
                         placeholder='Your Name'
@@ -160,10 +160,10 @@ const Contactus = () => {
                         disabled={isSubmitting}
                     />
                 </div>
-                <div className='w-full md:w-1/2 text-left md:pl-4'>
-                    Your Email
+                <div className='w-full md:w-1/2 text-left'>
+                    <label className='block text-sm font-medium mb-2'>Your Email</label>
                     <input 
-                        className='w-full border border-gray-300 rounded py-3 px-4 mt-2 focus:border-blue-500 focus:outline-none transition-all duration-300' 
+                        className='w-full border border-gray-300 rounded py-3 px-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-300' 
                         required 
                         name='email' 
                         placeholder='Your Email'
@@ -175,9 +175,9 @@ const Contactus = () => {
                 </div>
             </div>
             <div className='my-6 text-left'>
-                Message
+                <label className='block text-sm font-medium mb-2'>Message</label>
                 <textarea 
-                    className='w-full border border-gray-300 rounded py-3 px-4 mt-2 h-48 resize-none focus:border-blue-500 focus:outline-none transition-all duration-300' 
+                    className='w-full border border-gray-300 rounded py-3 px-4 h-48 resize-none focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition-all duration-300' 
                     required 
                     name='message' 
                     placeholder='Message'
@@ -190,10 +190,10 @@ const Contactus = () => {
             <button 
                 type='submit'
                 disabled={isSubmitting}
-                className={`py-2 px-12 mb-10 rounded transition-all duration-300 transform hover:scale-105 ${
+                className={`py-3 px-12 mb-10 rounded font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                     isSubmitting 
                         ? 'bg-gray-400 text-gray-200 cursor-not-allowed' 
-                        : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg'
+                        : 'bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg focus:ring-blue-500'
                 }`}
             >
                 {isSubmitting ? 'Sending...' : 'Send Message'}

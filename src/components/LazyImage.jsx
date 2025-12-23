@@ -1,10 +1,11 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, forwardRef } from 'react'
 
-const LazyImage = ({ src, alt, className, placeholder, width = 800, height = 600, ...props }) => {
+const LazyImage = forwardRef(({ src, alt, className, placeholder, width = 800, height = 600, ...props }, ref) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isInView, setIsInView] = useState(false)
   const [hasError, setHasError] = useState(false)
   const imgRef = useRef(null)
+  const containerRef = ref || useRef(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -17,8 +18,8 @@ const LazyImage = ({ src, alt, className, placeholder, width = 800, height = 600
       { threshold: 0.1 }
     )
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current)
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
     }
 
     return () => observer.disconnect()
@@ -38,7 +39,7 @@ const LazyImage = ({ src, alt, className, placeholder, width = 800, height = 600
 
   return (
     <div 
-      ref={imgRef} 
+      ref={containerRef} 
       className={`relative ${className}`}
       style={{
         aspectRatio: `${width}/${height}`
@@ -68,6 +69,7 @@ const LazyImage = ({ src, alt, className, placeholder, width = 800, height = 600
       {/* Actual Image */}
       {isInView && !hasError && (
         <img
+          ref={imgRef}
           src={src}
           alt={altText}
           width={width}
@@ -83,6 +85,8 @@ const LazyImage = ({ src, alt, className, placeholder, width = 800, height = 600
       )}
     </div>
   )
-}
+})
+
+LazyImage.displayName = 'LazyImage'
 
 export default LazyImage
