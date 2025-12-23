@@ -22,15 +22,11 @@ const LoadingSpinner = () => (
 function App() {
   useEffect(() => {
     // Initialize performance monitoring
-    measurePerformance()
-    
-    // Preload critical resources
-    const criticalResources = [
-      assets.header_img,
-      assets.brand_img,
-      assets.logo
-    ]
-    preloadCriticalResources(criticalResources)
+    try {
+      measurePerformance()
+    } catch (error) {
+      console.warn('Performance monitoring error:', error)
+    }
   }, [])
 
   return (
