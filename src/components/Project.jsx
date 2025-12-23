@@ -1,9 +1,41 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, memo } from "react"
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { assets, projectsData } from "../assets/assets"
+import LazyImage from './LazyImage'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const ProjectCard = memo(({ project, index, cardsToShow }) => {
+  return (
+    <div 
+      className={`relative flex-shrink-0 px-3 group cursor-pointer ${
+        cardsToShow === 1 ? 'w-full' : 
+        cardsToShow === 2 ? 'w-1/2' : 
+        'w-1/4'
+      }`}
+    >
+      <div className="overflow-hidden rounded-lg">
+        <LazyImage 
+          src={project.image} 
+          alt={project.title} 
+          className="w-full h-auto mb-14 rounded-lg transition-transform duration-500 group-hover:scale-110"
+          placeholder="Loading..."
+        />
+      </div>
+      <div className="absolute left-3 right-3 bottom-5 flex justify-center">
+        <div className="inline-block bg-white w-3/4 px-4 py-2 shadow-md rounded transition-all duration-300 group-hover:shadow-xl group-hover:scale-105">
+          <h2 className="text-xl font-semibold text-gray-800">{project.title}</h2>
+          <p className="text-gray-500 text-sm">
+            {project.price} <span className="px-1">|</span> {project.location}
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+})
+
+ProjectCard.displayName = 'ProjectCard'
 
 const Project = () => {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -122,30 +154,12 @@ const Project = () => {
             }}
         >
             {projectsData.map((project, index) => (
-                <div 
-                    key={index} 
-                    className={`relative flex-shrink-0 px-3 group cursor-pointer ${
-                        cardsToShow === 1 ? 'w-full' : 
-                        cardsToShow === 2 ? 'w-1/2' : 
-                        'w-1/4'
-                    }`}
-                >
-                    <div className="overflow-hidden rounded-lg">
-                        <img 
-                            src={project.image} 
-                            alt={project.title} 
-                            className="w-full h-auto mb-14 rounded-lg transition-transform duration-500 group-hover:scale-110" 
-                        />
-                    </div>
-                    <div className="absolute left-3 right-3 bottom-5 flex justify-center">
-                        <div className="inline-block bg-white w-3/4 px-4 py-2 shadow-md rounded transition-all duration-300 group-hover:shadow-xl group-hover:scale-105">
-                            <h2 className="text-xl font-semibold text-gray-800">{project.title}</h2>
-                            <p className="text-gray-500 text-sm">
-                                {project.price} <span className="px-1">|</span> {project.location}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <ProjectCard 
+                  key={`${project.title}-${index}`}
+                  project={project}
+                  index={index}
+                  cardsToShow={cardsToShow}
+                />
             ))}
         </div>
     </div>

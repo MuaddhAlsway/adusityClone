@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, memo } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import {assets} from '../assets/assets'
+import LazyImage from './LazyImage'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -104,11 +105,12 @@ const About = () => {
           <p className="text-gray-500 max-w-80 text-center mb-8">Passionate About Properties, Dedicated to Your Vision</p>
         </div>
     <div className="flex flex-col md:flex-row items-center md:items-start md:gap-20">
-      <img 
+      <LazyImage 
         ref={imageRef}
         src={assets.brand_img} 
-        alt="" 
-        className='w-full sm:w-1/2 max-w-lg' 
+        alt="Brand" 
+        className='w-full sm:w-1/2 max-w-lg'
+        placeholder="Loading brand image..."
       />
       <div className='flex flex-col items-center md:items-start mt-10 text-gray-600'>
         <div 

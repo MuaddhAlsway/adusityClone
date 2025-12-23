@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 @import "tailwindcss";
+
 * {
     font-family: 'Outfit', sans-serif;
 }
@@ -9,4 +10,55 @@
 .gsap-element {
     opacity: 1 !important;
     transform: translateY(0) !important;
+}
+
+/* Performance optimizations */
+img {
+    content-visibility: auto;
+    contain-intrinsic-size: 300px 200px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Critical CSS for above-the-fold content */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Optimize animations */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Optimize focus states for accessibility */
+:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
 }

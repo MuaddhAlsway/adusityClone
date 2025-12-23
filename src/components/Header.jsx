@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, memo } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { assets } from '../assets/assets'
+import { throttle } from '../utils/performance'
 import Navbar from "./Navbar"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -110,21 +111,21 @@ const Header = () => {
           })
         }
 
-        // Add mouse move parallax effect
-        const handleMouseMove = (e) => {
+        // Add mouse move parallax effect (throttled for performance)
+        const handleMouseMove = throttle((e) => {
           const { clientX, clientY } = e
           const { innerWidth, innerHeight } = window
           
-          const xPos = (clientX / innerWidth - 0.5) * 20
-          const yPos = (clientY / innerHeight - 0.5) * 20
+          const xPos = (clientX / innerWidth - 0.5) * 10 // Reduced intensity
+          const yPos = (clientY / innerHeight - 0.5) * 10
           
           gsap.to(containerRef.current, {
             x: xPos,
             y: yPos,
-            duration: 1,
+            duration: 0.5, // Faster response
             ease: "power2.out"
           })
-        }
+        }, 16) // 60fps throttling
 
         window.addEventListener('mousemove', handleMouseMove)
 
