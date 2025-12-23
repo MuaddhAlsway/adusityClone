@@ -68,9 +68,14 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
-        passes: 2
+        passes: 3,
+        pure_funcs: ['console.log', 'console.info']
       },
-      mangle: true,
+      mangle: {
+        properties: {
+          regex: /^_/
+        }
+      },
       format: {
         comments: false
       }
@@ -89,7 +94,8 @@ export default defineConfig({
     },
     cssCodeSplit: true,
     sourcemap: false,
-    reportCompressedSize: false
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 500
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'gsap', 'react-toastify'],

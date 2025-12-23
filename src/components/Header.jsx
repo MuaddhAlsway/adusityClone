@@ -160,6 +160,7 @@ const Header = () => {
        <div 
          ref={overlayRef}
          className="absolute inset-0 bg-black opacity-40"
+         aria-hidden="true"
        ></div>
        
        <Navbar/> 

@@ -19,7 +19,15 @@ function Navbar() {
   return (
     <div className='absolute top-0 left-0 w-full z-10'>
       <nav className='container mx-auto flex justify-between items-center py-4 px-6 md:px-20 lg:px-32 bg-transparent' aria-label='Main navigation'>
-        <img src={assets.logo} alt="Adusity - Premium Real Estate Portfolio Logo" className='h-8' />
+        <img 
+          src={assets.logo} 
+          alt="Adusity - Premium Real Estate Portfolio Logo" 
+          className='h-8' 
+          width={120}
+          height={32}
+          loading="eager"
+          decoding="sync"
+        />
         
         <ul className='hidden md:flex gap-7 text-white' role="menubar">
           <li role="none">
@@ -55,7 +63,15 @@ function Navbar() {
           aria-expanded={showMobileMenu}
           aria-controls="mobile-menu"
         >
-          <img src={assets.menu_icon} alt="Open menu" className="w-full h-full" />
+          <img 
+            src={assets.menu_icon} 
+            alt="Open menu" 
+            className="w-full h-full"
+            width={28}
+            height={28}
+            loading="eager"
+            decoding="sync"
+          />
         </button>
       </nav>
 
@@ -73,7 +89,15 @@ function Navbar() {
             className='cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded'
             aria-label="Close mobile navigation menu"
           >
-            <img src={assets.cross_icon} className='w-6' alt="Close menu" />
+            <img 
+              src={assets.cross_icon} 
+              className='w-6' 
+              alt="Close menu"
+              width={24}
+              height={24}
+              loading="eager"
+              decoding="sync"
+            />
           </button>
         </div>
         

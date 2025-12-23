@@ -86,7 +86,15 @@ const Footer = () => {
     >
       <div className='container mx-auto flex flex-col md:flex-row justify-between items-start'>
         <div className='w-full md:w-1/3 mb-8 md:mb-0'>
-          <img src={assets.logo} alt="Adusity - Premium Real Estate Portfolio Logo" className='mb-4 w-40' />
+          <img 
+            src={assets.logo} 
+            alt="Adusity - Premium Real Estate Portfolio Logo" 
+            className='mb-4 w-40' 
+            width={160}
+            height={40}
+            loading="lazy"
+            decoding="async"
+          />
           <p className='text-gray-400 leading-relaxed'>
             Building exceptional digital experiences with cutting-edge technology and innovative design solutions.
           </p>
